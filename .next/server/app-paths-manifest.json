@@ -1,4 +1,7 @@
 {
-  "/not-found": "app/not-found.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/investment-recommendations/page": "app/investment-recommendations/page.js",
+  "/analysis/page": "app/analysis/page.js",
+  "/auth/page": "app/auth/page.js",
+  "/market-trends/page": "app/market-trends/page.js"
 }

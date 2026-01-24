@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { AuthProvider } from '@/lib/context/AuthContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,7 +16,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'Startup Investment Platform',
-  description: 'A platform for startups and investors',
+  description: 'Discover and invest in the next generation of innovative startups',
 }
 
 export default function RootLayout({
@@ -25,7 +26,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="font-sans h-full">{children}</body>
+      <body className="font-sans h-full">
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   )
 } 

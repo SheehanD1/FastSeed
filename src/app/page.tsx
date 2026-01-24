@@ -1,9 +1,36 @@
+'use client';
+
 import React from 'react'
 import StartupTicker from './components/StartupTicker'
+import { useAuth } from '@/lib/context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const { user, logout, isAuthenticated } = useAuth()
+  const router = useRouter()
+
   return (
     <div className="min-h-screen bg-rh-light">
+      <div className="container mx-auto px-4 py-4 flex justify-end">
+        {isAuthenticated ? (
+          <div className="flex items-center gap-4">
+            <span className="text-rh-dark">Welcome, {user?.username}!</span>
+            <button
+              onClick={logout}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => router.push('/auth')}
+            className="bg-rh-blue text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+          >
+            Login
+          </button>
+        )}
+      </div>
       <StartupTicker />
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
@@ -24,8 +51,11 @@ export default function Home() {
             </div>
             <h2 className="text-2xl font-bold text-rh-dark mb-2">For Startups</h2>
             <p className="text-rh-gray mb-4">Create your profile and showcase your business to potential investors</p>
-            <button className="bg-rh-blue text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-              Get Started
+            <button
+              onClick={() => router.push('/analysis')}
+              className="bg-rh-blue text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Analyze Your Startup
             </button>
           </div>
 
@@ -37,8 +67,11 @@ export default function Home() {
             </div>
             <h2 className="text-2xl font-bold text-rh-dark mb-2">For Investors</h2>
             <p className="text-rh-gray mb-4">Discover and invest in promising startups with high growth potential</p>
-            <button className="bg-rh-green text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-              Browse Startups
+            <button
+              onClick={() => router.push('/investment-recommendations')}
+              className="bg-rh-green text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Get Investment Advice
             </button>
           </div>
 
@@ -48,10 +81,29 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-rh-dark mb-2">AI-Powered</h2>
-            <p className="text-rh-gray mb-4">Get data-driven insights on startup success probability</p>
-            <button className="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-              Learn More
+            <h2 className="text-2xl font-bold text-rh-dark mb-2">Market Trends</h2>
+            <p className="text-rh-gray mb-4">Get data-driven insights on market trends and opportunities</p>
+            <button
+              onClick={() => router.push('/market-trends')}
+              className="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Explore Market Trends
+            </button>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-orange-500 bg-opacity-10 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-rh-dark mb-2">Semantic Search</h2>
+            <p className="text-rh-gray mb-4">Find startups using natural language search powered by AI embeddings</p>
+            <button
+              onClick={() => router.push('/search')}
+              className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              Search Startups
             </button>
           </div>
         </div>
@@ -61,7 +113,10 @@ export default function Home() {
           <p className="text-rh-gray mb-8 max-w-2xl mx-auto">
             Join our platform today and be part of the future of startup investing
           </p>
-          <button className="bg-rh-dark text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors text-lg">
+          <button
+            onClick={() => router.push('/auth')}
+            className="bg-rh-dark text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors text-lg"
+          >
             Sign Up Now
           </button>
         </div>
